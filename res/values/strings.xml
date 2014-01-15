@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TB-PVR</string>
+    <string name="title_section1">Program Guide</string>
+    <string name="title_section2">Scheduled Recordings</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- EPG Strings -->
+    <string name="day">Day:</string>
+    <string name="time">Time:</string>
+    <string name="channels">Channels</string>
+
+    <string-array name="times">
+        <item>00:00</item>
+        <item>01:00</item>
+        <item>02:00</item>
+        <item>03:00</item>
+        <item>04:00</item>
+        <item>05:00</item>
+    </string-array>
+    <!-- Schedule Strings -->
+
+</resources>
