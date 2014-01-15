@@ -7,8 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="#0099cc"
-    tools:context=".epg_activity$PlaceholderFragment"
-    style="@style/textLarge">
+    tools:context=".epg_activity$PlaceholderFragment">
 
     <Spinner
         android:id="@+id/daySpinner"
@@ -57,7 +56,8 @@
         android:layout_alignBottom="@+id/channels"
         android:layout_alignTop="@+id/channels"
         android:src="@drawable/abc_ic_go"
-        android:rotation="180" />
+        android:rotation="180"
+        android:contentDescription="@string/timeBack" />
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
@@ -76,7 +76,8 @@
         android:layout_alignBottom="@+id/channels"
         android:layout_alignTop="@+id/channels"
         android:src="@drawable/abc_ic_go"
-        android:clickable="false" />
+        android:clickable="false"
+        android:contentDescription="@string/timeForward" />
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -91,7 +92,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="fill_parent"

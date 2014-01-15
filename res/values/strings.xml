@@ -9,6 +9,9 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
+    <string name="timeBack">Back in time</string>
+    <string name="timeForward">Forward in time</string>
+
     <!-- EPG Strings -->
     <string name="day">Day:</string>
     <string name="time">Time:</string>
