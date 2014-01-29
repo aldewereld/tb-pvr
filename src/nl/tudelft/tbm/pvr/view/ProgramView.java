@@ -25,18 +25,22 @@ public class ProgramView extends CustomView {
         super(context);
     }
 
-    public ProgramView(Context context, Program program) {
+    public ProgramView(Context context, Program program, int duration) {
         super(context);
 
         this.program = program;
         this.title = program.getTitle();
-        if(!program.getSubtitle().equals(""))
-            subtitle = program.getSubtitle();
-        else
-            subtitle = program.getCategory();
+        if(duration < 15) {
+            this.title = "...";
+        } else {
+            if(!program.getSubtitle().equals(""))
+                subtitle = program.getSubtitle();
+            else
+                subtitle = program.getCategory();
+        }
         categoryColor = Constant.getColor(program.getCategory());
 
-        setLayout(program.getDuration());
+        setLayout(duration);
 
         setBackgroundImage();
 
