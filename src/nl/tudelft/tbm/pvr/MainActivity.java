@@ -10,10 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import nl.tudelft.tbm.pvr.data.Channel;
 import nl.tudelft.tbm.pvr.data.Program;
@@ -52,6 +53,11 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        mHours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        if(Calendar.getInstance().get(Calendar.MINUTE)-30 > 0)
+            mMinutes = 30;
+        else
+            mMinutes = 0;
     }
 
     @Override
@@ -60,8 +66,9 @@ public class MainActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch(position) {
             case 0:
-                if(mEPG == null)
+                if(mEPG == null) {
                     mEPG = new EPGFragment();
+                }
                 mEPG.setChannels(channels);
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, mEPG)
@@ -82,6 +89,7 @@ public class MainActivity extends ActionBarActivity
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
+                mEPG.setTime(mHours, mMinutes);
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
@@ -132,10 +140,7 @@ public class MainActivity extends ActionBarActivity
             mHours = hours;
             mMinutes = minutes;
 
-            //set text on button
-            ((Button) findViewById(R.id.timeButton)).setText((mHours < 10?"0":"")+mHours+":"+(mMinutes == 0?"00":"30"));
-
             //update the view!!
-        mEPG.setTime(mHours, mMinutes);
+            mEPG.drawTimeLine((LinearLayout) findViewById(R.id.timeHeaderContainer),mHours, mMinutes);
     }
 }
