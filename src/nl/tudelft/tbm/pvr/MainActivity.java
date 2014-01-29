@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Calendar;
 
 import nl.tudelft.tbm.pvr.data.Channel;
 import nl.tudelft.tbm.pvr.data.Program;
+import nl.tudelft.tbm.pvr.view.ChannelAdapter;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, TimePickerDialog.OnTimeSetListener {
@@ -141,6 +143,6 @@ public class MainActivity extends ActionBarActivity
             mMinutes = minutes;
 
             //update the view!!
-            mEPG.drawTimeLine((LinearLayout) findViewById(R.id.timeHeaderContainer),mHours, mMinutes);
+            mEPG.drawTimeLine((LinearLayout) findViewById(R.id.timeHeaderContainer), mHours, mMinutes);
     }
 }

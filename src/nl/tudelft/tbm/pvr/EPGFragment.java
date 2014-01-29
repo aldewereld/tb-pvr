@@ -10,11 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 
 import nl.tudelft.tbm.pvr.data.Channel;
+import nl.tudelft.tbm.pvr.data.Program;
+import nl.tudelft.tbm.pvr.view.ChannelAdapter;
 import nl.tudelft.tbm.pvr.view.TimeHeaderView;
 
 /**
@@ -35,6 +38,16 @@ public class EPGFragment extends Fragment {
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, days);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(adapter);
+
+        ListView channelList = (ListView) rootView.findViewById(R.id.channelList);
+        ArrayList<Program> ned1 = new ArrayList<Program>();
+        ned1.add(new Program("NOS Journaal","", "Nieuws van 20.00 uur", "Nieuws", "2014-01-30T09:00","2014-01-30T09:40"));
+        ned1.add(new Program("Man Bijt Hond", "", "Satire", "Talk", "2014-01-30T09:40Z", "2014-01-30T10:00Z"));
+        channels.add(new Channel("Nederland 1", ned1));
+        channels.add(new Channel("Nederland 2", new ArrayList<Program>()));
+        channels.add(new Channel("Nederland 3", new ArrayList<Program>()));
+        channels.add(new Channel("RTL 4", new ArrayList<Program>()));
+        channelList.setAdapter(new ChannelAdapter(getActivity(), channels));
 
         return rootView;
     }
