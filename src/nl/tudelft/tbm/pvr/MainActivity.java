@@ -1,33 +1,42 @@
 package nl.tudelft.tbm.pvr;
 
-import android.app.Activity;
+import android.app.TimePickerDialog;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.Spinner;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TimePicker;
 
 import java.util.ArrayList;
 
-public class epg_activity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+import nl.tudelft.tbm.pvr.data.Channel;
+import nl.tudelft.tbm.pvr.data.Program;
+
+public class MainActivity extends ActionBarActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, TimePickerDialog.OnTimeSetListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private EPGFragment mEPG;
+    private RecordFragment mRecord;
+
+    private int mHours, mMinutes;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
+    private ArrayList<Channel> channels = new ArrayList<Channel>();
+    private ArrayList<Program> recordings = new ArrayList<Program>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,20 +52,30 @@ public class epg_activity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        Spinner daySpinner = (Spinner) findViewById(R.id.daySpinner);
-        ArrayList<String> days = new ArrayList<String>();
-        days.add("Monday 06-01-2014");
-        days.add("Tuesday 07-01-2014");
-        Spinner timeSpinner = (Spinner) findViewById(R.id.timeSpinner);
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+        switch(position) {
+            case 0:
+                if(mEPG == null)
+                    mEPG = new EPGFragment();
+                mEPG.setChannels(channels);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, mEPG)
+                        .commit();
+                break;
+            case 1:
+                if(mRecord == null)
+                    mRecord = new RecordFragment();
+                mRecord.setScheduled(recordings);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, mRecord)
+                        .commit();
+                break;
+        }
     }
 
     public void onSectionAttached(int number) {
@@ -103,51 +122,20 @@ public class epg_activity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            if(getArguments().getInt(ARG_SECTION_NUMBER) == 1) {//EPG
-                View rootView = inflater.inflate(R.layout.fragment_epg, container, false);
-
-                return rootView;
-            } else {
-                View rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
-
-                return rootView;
-            }
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((epg_activity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
+    @Override
+    public void onTimeSet(TimePicker view, int hours, int minutes) {
+            mHours = hours;
+            mMinutes = minutes;
+
+            //set text on button
+            ((Button) findViewById(R.id.timeButton)).setText((mHours < 10?"0":"")+mHours+":"+(mMinutes == 0?"00":"30"));
+
+            //update the view!!
+        mEPG.setTime(mHours, mMinutes);
+    }
 }
