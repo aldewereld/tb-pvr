@@ -37,7 +37,7 @@
         android:textAppearance="@style/textLarge" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/textLarge"
         android:text="@string/channels"
@@ -47,7 +47,7 @@
         android:layout_marginTop="20dp" />
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:id="@+id/timeLeft"
         android:layout_toRightOf="@+id/channels"
@@ -68,7 +68,7 @@
         android:id="@+id/timeHeaderContainer"
         android:background="#CCCCCC"></LinearLayout>
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:id="@+id/timeRight"
         android:layout_alignParentRight="true"
@@ -78,11 +78,21 @@
         android:clickable="false"
         android:contentDescription="@string/timeForward" />
 
+    <ListView
+        android:id="@+id/channelList"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/channels"
+        android:layout_alignLeft="@+id/channels"
+        android:layout_alignRight="@+id/timeHeaderContainer">
+
+        </ListView>
+
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView"
-        android:layout_below="@+id/channels"
+        android:layout_below="@+id/channelList"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
