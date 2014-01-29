@@ -2,6 +2,7 @@ package nl.tudelft.tbm.pvr.data;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.StringTokenizer;
 
 /**
  * @author Huib Aldewereld
@@ -24,10 +25,10 @@ public class Program {
     }
 
     private static int calculateDuration(String startTime, String endTime) {
-        String[] starts = startTime.split("-T:");
-        String[] ends = endTime.split("-T:");
-        Calendar startCal = new GregorianCalendar(Integer.parseInt(starts[0]),Integer.parseInt(starts[1]),Integer.parseInt(starts[2]),Integer.parseInt(starts[3]),Integer.parseInt(starts[4]));
-        Calendar endCal = new GregorianCalendar(Integer.parseInt(ends[0]),Integer.parseInt(ends[1]),Integer.parseInt(ends[2]),Integer.parseInt(ends[3]),Integer.parseInt(ends[4]));
+        StringTokenizer startTok = new StringTokenizer(startTime, "\\-T:Z");
+        Calendar startCal = new GregorianCalendar(Integer.parseInt(startTok.nextToken()), Integer.parseInt(startTok.nextToken()), Integer.parseInt(startTok.nextToken()), Integer.parseInt(startTok.nextToken()), Integer.parseInt(startTok.nextToken()));
+        StringTokenizer endTok = new StringTokenizer(endTime, "\\-T:Z");
+        Calendar endCal = new GregorianCalendar(Integer.parseInt(endTok.nextToken()), Integer.parseInt(endTok.nextToken()), Integer.parseInt(endTok.nextToken()), Integer.parseInt(endTok.nextToken()), Integer.parseInt(endTok.nextToken()));
 
         long millis = endCal.getTimeInMillis() - startCal.getTimeInMillis();
         int duration = (int) (millis / 1000 / 60);// 1000 milliseconds per second, 60 seconds per minute.
