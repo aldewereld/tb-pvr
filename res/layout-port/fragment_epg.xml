@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainEPG"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,29 +11,27 @@
     tools:context=".epg_activity$PlaceholderFragment">
 
     <Spinner
-        android:id="@+id/daySpinner"
+        android:id="@+id/dayButton"
         android:layout_height="wrap_content"
         android:layout_width="175dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
+        android:background="@android:drawable/btn_dropdown"/>
 
-    <Spinner
+    <Button
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignBaseline="@+id/daySpinner"
-        android:id="@+id/timeSpinner"
-        android:entries="@array/times"
+        android:layout_alignBaseline="@+id/dayButton"
+        android:id="@+id/timeButton"
         android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
+        android:onClick="showTimePickerDialog"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/timeSpinner"
-        android:layout_alignBaseline="@+id/timeSpinner"
+        android:layout_toLeftOf="@+id/timeButton"
+        android:layout_alignBaseline="@+id/timeButton"
         android:text="@string/time"
         android:id="@+id/epgTime"
         android:textAppearance="@style/textLarge" />
@@ -43,7 +42,7 @@
         android:textAppearance="@style/textLarge"
         android:text="@string/channels"
         android:id="@+id/channels"
-        android:layout_below="@+id/daySpinner"
+        android:layout_below="@+id/dayButton"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="20dp" />
 
@@ -58,16 +57,16 @@
         android:src="@drawable/abc_ic_go"
         android:rotation="180"
         android:contentDescription="@string/timeBack" />
-    <TextView
+    <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
+        android:orientation="horizontal"
         android:layout_toRightOf="@+id/timeLeft"
         android:layout_alignBottom="@+id/timeLeft"
         android:layout_toLeftOf="@+id/timeRight"
-        android:id="@+id/timeline"
-        android:layout_alignBaseline="@+id/channels"
-        android:background="#CCCCCC"
-        android:textAppearance="@style/textNormal" />
+        android:layout_alignTop="@+id/timeLeft"
+        android:id="@+id/timeHeaderContainer"
+        android:background="#CCCCCC"></LinearLayout>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
