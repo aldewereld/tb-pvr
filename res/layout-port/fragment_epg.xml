@@ -56,6 +56,7 @@
         android:layout_alignTop="@+id/channels"
         android:src="@drawable/abc_ic_go"
         android:rotation="180"
+        android:onClick="decreaseTimeView"
         android:contentDescription="@string/timeBack" />
     <LinearLayout
         android:layout_height="wrap_content"
@@ -65,8 +66,7 @@
         android:layout_alignBottom="@+id/timeLeft"
         android:layout_toLeftOf="@+id/timeRight"
         android:layout_alignTop="@+id/timeLeft"
-        android:id="@+id/timeHeaderContainer"
-        android:background="#CCCCCC"></LinearLayout>
+        android:id="@+id/timeHeaderContainer"></LinearLayout>
     <ImageView
         android:layout_width="25dp"
         android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
         android:layout_alignBottom="@+id/channels"
         android:layout_alignTop="@+id/channels"
         android:src="@drawable/abc_ic_go"
-        android:clickable="false"
+        android:onClick="increaseTimeView"
         android:contentDescription="@string/timeForward" />
 
     <ListView
@@ -87,137 +87,5 @@
         android:layout_alignRight="@+id/timeHeaderContainer">
 
         </ListView>
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_below="@+id/channelList"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginBottom="5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView"
-                    android:src="@drawable/ic_ned1"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp" />
-
-                <LinearLayout
-                    android:id="@+id/program1"
-                    android:layout_height="48dp"
-                    android:layout_width="100dp"
-                    android:orientation="vertical"
-                    android:background="#FF0000"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="32dp">
-
-                        <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:maxLines="2"
-                            android:textAppearance="@style/textLarge"
-                            android:text="Program Title"
-                            android:paddingLeft="5dp" />
-                        <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:maxLines="2"
-                            android:textAppearance="@style/textNormal"
-                            android:text="Category"
-                            android:paddingLeft="7dp" />
-                    </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/program2"
-                    android:layout_height="48dp"
-                    android:layout_width="100dp"
-                    android:orientation="vertical"
-                    android:background="#00FF00"
-                    android:layout_toLeftOf="@+id/program1">
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:maxLines="2"
-                        android:textAppearance="@style/textLarge"
-                        android:text="Program Title"
-                        android:paddingLeft="5dp" />
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:maxLines="2"
-                        android:textAppearance="@style/textNormal"
-                        android:text="Category"
-                        android:paddingLeft="7dp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_height="48dp"
-                    android:layout_width="100dp"
-                    android:orientation="vertical"
-                    android:background="#0000FF"
-                    android:layout_toLeftOf="@+id/program2">
-
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:maxLines="2"
-                        android:textAppearance="@style/textLarge"
-                        android:text="Program Title"
-                        android:paddingLeft="5dp" />
-                    <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:maxLines="2"
-                        android:textAppearance="@style/textNormal"
-                        android:text="Category"
-                        android:paddingLeft="7dp" />
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginBottom="5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView2"
-                    android:src="@drawable/ic_ned2"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginBottom="5dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView3"
-                    android:src="@drawable/ic_ned3"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp" />
-            </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
 
 </RelativeLayout>
