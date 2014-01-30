@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popupMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        android:background="#0099cc"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ImageView
+            android:layout_height="15dp"
+            android:layout_width="15dp"
+            android:layout_gravity="right"
+            android:id="@+id/recordIcon"
+            android:src="@android:drawable/ic_notification_overlay"/>
+
+        <TableLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/table"
+            android:layout_marginTop="5dp">
+
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Airtime:"
+                    android:textAppearance="@style/textLarge"
+                    />
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="@style/textNormal"
+                    android:id="@+id/airTime"
+                    android:text="07:00 AM to 07:30 AM"/>
+
+                </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Channel:"
+                    android:textAppearance="@style/textLarge"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/channelTitle"
+                    android:text="Nederland 1"
+                    android:textAppearance="@style/textNormal"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="@style/textLarge"
+                    android:text="Title:"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/name"
+                    android:textAppearance="@style/textNormal"
+                    android:text="some title"/>
+
+            </TableRow>
+
+
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/subtitleRow">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/subTitle"
+                    android:text="Subtitle:"
+                    android:textAppearance="@style/textLarge"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="some subtitle"
+                    android:textAppearance="@style/textNormal"/>
+            </TableRow>
+
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/descriptionTitle"
+                    android:layout_marginRight="25dp"
+                    android:text="Description:"
+                    android:textAppearance="@style/textLarge"/>
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/description"
+                    android:text="some rather long text that this is about the NOS journaal, the news in the Netherlands that 6 million people watch every evening."
+                    android:maxLines="6"
+                    android:minLines="5"
+                    android:textAppearance="@style/textNormal"/>
+
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category:"
+                    android:textAppearance="@style/textLarge"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amusement"
+                    android:id="@+id/category"
+                    android:textAppearance="@style/textNormal"/>
+
+            </TableRow>
+            </TableLayout>
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_gravity="left"
+            android:paddingBottom="10dp"
+            android:paddingTop="20dp">
+
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/recordButton"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="Record this"
+                android:textAppearance="@style/textLarge"/>
+
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/closeButton"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="Ok"
+                android:textAppearance="@style/textLarge"/>
+            </RelativeLayout>
+    </LinearLayout>
+
+    </FrameLayout>
