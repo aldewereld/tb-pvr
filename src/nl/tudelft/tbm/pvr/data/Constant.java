@@ -16,6 +16,7 @@ public class Constant {
     public static int[] talk = new int[]{Color.rgb(60,50,170), Color.rgb(145,135,230)};
     public static int[] education = new int[]{Color.rgb(200,200,200), Color.rgb(225,225,225)};
     public static int[] sports = new int[]{Color.rgb(60,150,20), Color.rgb(80,200,25)};
+    public static int[] amusement = new int[]{Color.rgb(0,0,0), Color.rgb(0,0,0)};//TODO
     public static int[] unknown = new int[]{Color.rgb(100,100,100),Color.rgb(150,150,150)};
 
     public static int[] timeHeader = new int[]{Color.rgb(15,20,135), Color.rgb(15,20,200)};
