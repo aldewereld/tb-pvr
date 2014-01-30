@@ -27,6 +27,7 @@ public class EPGFragment extends Fragment {
 
     private ArrayList<Channel> channels = new ArrayList<Channel>();
     private int mHours, mMinutes;
+    private ChannelAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,13 +42,27 @@ public class EPGFragment extends Fragment {
 
         ListView channelList = (ListView) rootView.findViewById(R.id.channelList);
         ArrayList<Program> ned1 = new ArrayList<Program>();
-        ned1.add(new Program("NOS Journaal","", "Nieuws van 20.00 uur", "Nieuws", "2014-01-30T09:00","2014-01-30T09:40"));
-        ned1.add(new Program("Man Bijt Hond", "", "Satire", "Talk", "2014-01-30T09:40Z", "2014-01-30T10:00Z"));
+        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-29T23:55Z","2014-01-30T00:15Z"));
+        ned1.add(new Program("Paul & Witteman", "", "", "Talk", "2014-01-30T00:15Z", "2014-01-30T01:15Z"));
+        ned1.add(new Program("Een Vandaag", "", "", "Actualiteit", "2014-01-30T01:15Z", "2014-01-30T01:45Z"));
+        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T01:45Z", "2014-01-30T02:00Z"));
+        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T02:00Z", "2014-01-30T02:27Z"));
+        ned1.add(new Program("NOS Tekst TV", "", "", "Actualiteit", "2014-01-30T02:27Z", "2014-01-30T05:55Z"));
+        ned1.add(new Program("Nederland in Beweging!", "", "", "Sports", "2014-01-30T05:55Z", "2014-01-30T06:10Z"));
+        ned1.add(new Program("Max Geheugentrainer", "", "", "Amusement", "2014-01-30T06:10Z", "2014-01-30T06:30Z"));
+        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T06:30Z", "2014-01-30T07:00Z"));
+        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T07:00Z", "2014-01-30T07:10Z"));
+        ned1.add(new Program("Vandaag de Dag", "", "", "Actualiteit", "2014-01-30T07:10Z", "2014-01-30T07:30Z"));
+        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T07:30Z", "2014-01-30T07:40Z"));
+        ned1.add(new Program("Vandaag de Dag", "", "", "Actualiteit", "2014-01-30T07:40Z", "2014-01-30T08:00Z"));
+
+        channels.clear();
+
         channels.add(new Channel("Nederland 1", ned1));
         channels.add(new Channel("Nederland 2", new ArrayList<Program>()));
         channels.add(new Channel("Nederland 3", new ArrayList<Program>()));
         channels.add(new Channel("RTL 4", new ArrayList<Program>()));
-        channelList.setAdapter(new ChannelAdapter(getActivity(), channels));
+        channelList.setAdapter(mAdapter);
 
         return rootView;
     }
@@ -55,6 +70,7 @@ public class EPGFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        mAdapter = new ChannelAdapter(getActivity(), channels);
         ((MainActivity) activity).onSectionAttached(1);
     }
 
@@ -71,10 +87,17 @@ public class EPGFragment extends Fragment {
     public void setTime(int hours, int minutes) {
         mHours = hours;
         mMinutes = minutes;
+        String date = "2014-01-30T"+(mHours < 10?"0":"")+mHours+":"+(minutes == 0?"00":"30")+"Z";
+        System.err.println("Setting date to "+date);
+        mAdapter.setDate(date);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void drawTimeLine(LinearLayout container, int hours, int minutes) {
         container.removeAllViews();
+
+        mAdapter.setDate("2014-01-30T"+(hours < 10?"0":"")+hours+":"+(minutes == 0?"00":"30")+"Z");
+        mAdapter.notifyDataSetChanged();
 
         //set text on button
         ((Button) getActivity().findViewById(R.id.timeButton)).setText((hours < 10?"0":"")+hours+":"+(minutes == 0?"00":"30"));
@@ -92,6 +115,8 @@ public class EPGFragment extends Fragment {
             if(half) {
                 minute = 0;
                 hour++;
+                if(hour == 24)
+                    hour = 0;
             } else {
                 minute = 30;
             }

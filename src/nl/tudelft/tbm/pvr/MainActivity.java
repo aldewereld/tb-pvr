@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TimePicker;
@@ -20,6 +21,7 @@ import java.util.Calendar;
 import nl.tudelft.tbm.pvr.data.Channel;
 import nl.tudelft.tbm.pvr.data.Program;
 import nl.tudelft.tbm.pvr.view.ChannelAdapter;
+import nl.tudelft.tbm.pvr.view.TimeHeaderView;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, TimePickerDialog.OnTimeSetListener {
@@ -33,6 +35,8 @@ public class MainActivity extends ActionBarActivity
 
     private int mHours, mMinutes;
 
+    private FrameLayout mLayout;
+
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -45,6 +49,9 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_epg);
+
+        mLayout = (FrameLayout) findViewById(R.id.container);
+        mLayout.getForeground().setAlpha(0);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -137,6 +144,23 @@ public class MainActivity extends ActionBarActivity
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
+    public void increaseTimeView(View v) {
+        LinearLayout timeline = (LinearLayout) findViewById(R.id.timeHeaderContainer);
+
+        String[] firstTime =  ((TimeHeaderView)timeline.getChildAt(0)).getTitle().split(":");
+        String[] lastTime = ((TimeHeaderView)timeline.getChildAt(timeline.getChildCount()-1)).getTitle().split(":");
+
+        int newHour = (Integer.parseInt(lastTime[0]) - Integer.parseInt(firstTime[0]))/2;//TODO deal with time overflow at midnight
+        newHour += Integer.parseInt(firstTime[0])-1;
+        int newMinute = Integer.parseInt(firstTime[0]);
+
+        onTimeSet(null, newHour, newMinute);
+    }
+
+    public void decreaseTimeView(View v) {
+        System.err.println("Decrease Time was clicked!");
+    }
+
     @Override
     public void onTimeSet(TimePicker view, int hours, int minutes) {
             mHours = hours;
@@ -145,4 +169,7 @@ public class MainActivity extends ActionBarActivity
             //update the view!!
             mEPG.drawTimeLine((LinearLayout) findViewById(R.id.timeHeaderContainer), mHours, mMinutes);
     }
+
+    public void dimActivity() { mLayout.getForeground().setAlpha(255); }
+    public void undimActivity() { mLayout.getForeground().setAlpha(0);}
 }
