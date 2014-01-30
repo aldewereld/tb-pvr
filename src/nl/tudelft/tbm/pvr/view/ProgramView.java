@@ -1,8 +1,16 @@
 package nl.tudelft.tbm.pvr.view;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import java.util.StringTokenizer;
 
 import nl.tudelft.tbm.pvr.R;
 import nl.tudelft.tbm.pvr.data.Constant;
@@ -13,10 +21,6 @@ import nl.tudelft.tbm.pvr.data.Program;
  * Implements the drawable Program elements (rounded rectangles representing the program in the timeline).
  */
 public class ProgramView extends CustomView {
-
-    protected int[] categoryColor = Constant.unknown;
-    protected int cornerRadius = 10;
-    protected float inside = 1.5f;
 
     private String subtitle;
     private Program program;
@@ -38,7 +42,10 @@ public class ProgramView extends CustomView {
             else
                 subtitle = program.getCategory();
         }
-        categoryColor = Constant.getColor(program.getCategory());
+        setCategoryColor(Constant.getColor(program.getCategory()));
+        setCornerRadius(10);
+        setInside(1.5f);
+        setColorBackground(Color.BLACK);
 
         setLayout(duration);
 
@@ -69,9 +76,9 @@ public class ProgramView extends CustomView {
 
     public void setRecord(boolean record) {
         if(record)
-            backgroundColor = Color.RED;
+            setColorBackground(Color.RED);
         else
-            backgroundColor = Color.BLACK;
+            setColorBackground(Color.BLACK);
     }
 
     public Program getProgram() {   return program; }

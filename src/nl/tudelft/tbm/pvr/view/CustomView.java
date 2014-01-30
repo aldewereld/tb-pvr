@@ -22,10 +22,10 @@ import nl.tudelft.tbm.pvr.data.Constant;
  */
 public class CustomView extends LinearLayout {
 
-    protected int backgroundColor = Color.BLACK;
-    protected int[] categoryColor = Constant.timeHeader;
-    protected int cornerRadius = 5;
-    protected float inside = 1f;
+    private int backgroundColor = Color.WHITE;
+    private int[] categoryColor = Constant.timeHeader;
+    private int cornerRadius = 5;
+    private float inside = 1.2f;
 
     protected String title;
 
@@ -75,6 +75,8 @@ public class CustomView extends LinearLayout {
         this.addView(header);
     }
 
+    public String getTitle() {  return title;    }
+
     public int getSize() { return width;   }
 
     @SuppressWarnings("deprecation")
@@ -99,4 +101,9 @@ public class CustomView extends LinearLayout {
             this.setBackground(layerDrawable);
         }
     }
+
+    protected void setColorBackground(int color) {  backgroundColor = color;    }
+    protected void setCategoryColor(int[] color) {  categoryColor = color;  }
+    protected void setInside(float inside) {    this.inside = inside;   }
+    protected void setCornerRadius(int radius) {    cornerRadius = radius;  }
 }
