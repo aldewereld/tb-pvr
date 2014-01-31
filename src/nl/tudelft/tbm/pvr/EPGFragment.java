@@ -40,6 +40,7 @@ public class EPGFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(adapter);
 
+        /* TEST CODE TODO: Remove*/
         ListView channelList = (ListView) rootView.findViewById(R.id.channelList);
         ArrayList<Program> ned1 = new ArrayList<Program>();
         ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-29T23:55Z","2014-01-30T00:15Z"));
@@ -88,7 +89,6 @@ public class EPGFragment extends Fragment {
         mHours = hours;
         mMinutes = minutes;
         String date = "2014-01-30T"+(mHours < 10?"0":"")+mHours+":"+(minutes == 0?"00":"30")+"Z";
-        System.err.println("Setting date to "+date);
         mAdapter.setDate(date);
         mAdapter.notifyDataSetChanged();
     }
@@ -96,8 +96,8 @@ public class EPGFragment extends Fragment {
     public void drawTimeLine(LinearLayout container, int hours, int minutes) {
         container.removeAllViews();
 
-        mAdapter.setDate("2014-01-30T"+(hours < 10?"0":"")+hours+":"+(minutes == 0?"00":"30")+"Z");
-        mAdapter.notifyDataSetChanged();
+        //update stored values, and propagate to ListView
+        setTime(hours, minutes);
 
         //set text on button
         ((Button) getActivity().findViewById(R.id.timeButton)).setText((hours < 10?"0":"")+hours+":"+(minutes == 0?"00":"30"));
