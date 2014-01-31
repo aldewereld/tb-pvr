@@ -1,21 +1,16 @@
 package nl.tudelft.tbm.pvr.view;
 
-import android.app.ActionBar;
+
 import android.content.Context;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +29,6 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
     private final Context context;
     private final ArrayList<Channel> channels;
     private String mDate = "2014-01-30T00:00Z";
-    private PopupWindow popup;
 
     public ChannelAdapter(Context context, ArrayList<Channel> channels) {
         super(context, R.layout.channel_layout, channels);
@@ -49,7 +43,7 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
         View rowView = inflater.inflate(R.layout.channel_layout, parent, false);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
-        //set icon
+        //set icon TODO: Add other channel icons
         String s = channels.get(position).getName();
         if(s.startsWith("Nederland 1")) {
             imageView.setImageResource(R.drawable.ic_ned1);
@@ -84,7 +78,8 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
                 Program program = channels.get(position).getPrograms().get(index);
                 ProgramView newProgram = new ProgramView(context, program, calculateDuration(program));
 
-                newProgram.setOnClickListener(new CustomListener(newProgram));
+                //newProgram.setOnClickListener(new CustomListener(newProgram));
+                newProgram.setOnClickListener(new ProgramDetails(context, newProgram));
 
                 programs.addView(newProgram);
                 screenWidth -= newProgram.getSize();
@@ -141,61 +136,4 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
     }
 
     public void setDate (String date) { mDate = date;   }
-
-    public class CustomListener implements View.OnClickListener {
-        private final ProgramView program;
-
-        public CustomListener(ProgramView program) {
-            this.program = program;
-        }
-
-        @Override
-        public void onClick(View v) {DisplayMetrics metrics = new DisplayMetrics();
-            final float scale = context.getResources().getDisplayMetrics().density;
-            View popupView = ((LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.popup_view, null);
-            popup = new PopupWindow(popupView, (int) (scale * 400 + 0.5f), ActionBar.LayoutParams.WRAP_CONTENT, true);
-            popup.setAnimationStyle(android.R.style.Animation_Dialog);
-            popup.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.shape_window_dim));
-            popup.setOutsideTouchable(true);
-
-            //set contents
-            TextView title = (TextView) popupView.findViewById(R.id.name);
-            title.setText(program.getProgram().getTitle());
-            TextView description = (TextView) popupView.findViewById(R.id.description);
-            description.setText(program.getProgram().getDescription());
-            TextView airtime = (TextView) popupView.findViewById(R.id.airTime);
-            String time = "";
-            StringTokenizer start = new StringTokenizer(program.getProgram().getStartTime(), "TZ");
-            //discard first (date):
-            start.nextToken();
-            time += start.nextToken();
-            StringTokenizer end = new StringTokenizer(program.getProgram().getEndTime(), "TZ");
-            end.nextToken();
-            time += " to " + end.nextToken();
-            airtime.setText(time);
-            TextView subtitle = (TextView) popupView.findViewById(R.id.subTitle);
-            subtitle.setText(program.getProgram().getSubtitle());
-
-            TextView category = (TextView) popupView.findViewById(R.id.category);
-            category.setText(program.getProgram().getCategory());
-
-            popup.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-
-
-            popupView.findViewById(R.id.closeButton).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    popup.dismiss();
-                }
-            });
-
-            popupView.findViewById(R.id.recordButton).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    popup.dismiss();
-                }
-            });
-
-        }
-    }
 }
