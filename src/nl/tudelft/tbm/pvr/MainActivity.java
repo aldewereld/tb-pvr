@@ -12,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TimePicker;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import java.util.Calendar;
 
 import nl.tudelft.tbm.pvr.data.Channel;
 import nl.tudelft.tbm.pvr.data.Program;
-import nl.tudelft.tbm.pvr.view.ChannelAdapter;
 import nl.tudelft.tbm.pvr.view.TimeHeaderView;
 
 public class MainActivity extends ActionBarActivity
@@ -49,9 +47,6 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_epg);
-
-        mLayout = (FrameLayout) findViewById(R.id.container);
-        mLayout.getForeground().setAlpha(0);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -169,7 +164,4 @@ public class MainActivity extends ActionBarActivity
             //update the view!!
             mEPG.drawTimeLine((LinearLayout) findViewById(R.id.timeHeaderContainer), mHours, mMinutes);
     }
-
-    public void dimActivity() { mLayout.getForeground().setAlpha(255); }
-    public void undimActivity() { mLayout.getForeground().setAlpha(0);}
 }
