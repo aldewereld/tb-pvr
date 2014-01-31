@@ -21,4 +21,15 @@
 
     <!-- Channel Layout Strings -->
     <string name="icon">Channel Icon</string>
+
+    <!-- Popup Program Details Strings -->
+    <string name="popupTitle">Title:</string>
+    <string name="popupSubtitle">Subtitle:</string>
+    <string name="popupChannel">Channel:</string>
+    <string name="popupAirtime">Airtime:</string>
+    <string name="popupDescription">Description:</string>
+    <string name="popupCategory">Category:</string>
+    <string name="popupClose">Close</string>
+    <string name="popupRecord">Record</string>
+    <string name="popupRecordButton">Record status</string>
 </resources>

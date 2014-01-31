@@ -23,7 +23,8 @@
             android:layout_width="15dp"
             android:layout_gravity="right"
             android:id="@+id/recordIcon"
-            android:src="@android:drawable/ic_notification_overlay"/>
+            android:src="@android:drawable/ic_notification_overlay"
+            android:contentDescription="@string/popupRecordButton"/>
 
         <TableLayout
             android:layout_height="wrap_content"
@@ -38,15 +39,14 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Airtime:"
+                    android:text="@string/popupAirtime"
                     android:textAppearance="@style/textLarge"
                     />
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:textAppearance="@style/textNormal"
-                    android:id="@+id/airTime"
-                    android:text="07:00 AM to 07:30 AM"/>
+                    android:id="@+id/airTime"/>
 
                 </TableRow>
 
@@ -56,13 +56,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Channel:"
+                    android:text="@string/popupChannel"
                     android:textAppearance="@style/textLarge"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/channelTitle"
-                    android:text="Nederland 1"
                     android:textAppearance="@style/textNormal"/>
 
             </TableRow>
@@ -74,14 +73,13 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:textAppearance="@style/textLarge"
-                    android:text="Title:"/>
+                    android:text="@string/popupTitle"/>
 
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:id="@+id/name"
-                    android:textAppearance="@style/textNormal"
-                    android:text="some title"/>
+                    android:textAppearance="@style/textNormal"/>
 
             </TableRow>
 
@@ -95,14 +93,13 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:id="@+id/subTitle"
-                    android:text="Subtitle:"
+                    android:text="@string/popupSubtitle"
                     android:textAppearance="@style/textLarge"/>
 
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="some subtitle"
+                    android:id="@+id/subTitle"
                     android:textAppearance="@style/textNormal"/>
             </TableRow>
 
@@ -115,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:id="@+id/descriptionTitle"
                     android:layout_marginRight="25dp"
-                    android:text="Description:"
+                    android:text="@string/popupDescription"
                     android:textAppearance="@style/textLarge"/>
 
                 <TextView
@@ -123,8 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/description"
-                    android:text="some rather long text that this is about the NOS journaal, the news in the Netherlands that 6 million people watch every evening."
-                    android:maxLines="6"
+                    android:maxLines="5"
                     android:minLines="5"
                     android:textAppearance="@style/textNormal"/>
 
@@ -135,13 +131,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Category:"
+                    android:text="@string/popupCategory"
                     android:textAppearance="@style/textLarge"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Amusement"
                     android:id="@+id/category"
                     android:textAppearance="@style/textNormal"/>
 
@@ -161,7 +156,7 @@
                 android:id="@+id/recordButton"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:text="Record this"
+                android:text="@string/popupRecord"
                 android:textAppearance="@style/textLarge"/>
 
             <Button
@@ -170,7 +165,7 @@
                 android:id="@+id/closeButton"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:text="Ok"
+                android:text="@string/popupClose"
                 android:textAppearance="@style/textLarge"/>
             </RelativeLayout>
     </LinearLayout>
