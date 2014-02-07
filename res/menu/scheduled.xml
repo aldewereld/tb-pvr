@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".EPG" >
-    <item android:id="@+id/updateChannel"
-        android:title="@string/updateChannels"
+    <item android:id="@+id/clearList"
+        android:title="@string/clearList"
         app:showAsAction="withText|ifRoom"/>
 </menu>

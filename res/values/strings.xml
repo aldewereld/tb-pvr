@@ -12,6 +12,9 @@
     <string name="timeBack">Back in time</string>
     <string name="timeForward">Forward in time</string>
 
+    <string name="updateChannels">Update channels</string>
+    <string name="clearList">Clear scheduled</string>
+
     <!-- EPG Strings -->
     <string name="day">Day:</string>
     <string name="time">Time:</string>

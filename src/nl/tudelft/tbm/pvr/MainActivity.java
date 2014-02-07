@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
@@ -29,6 +28,7 @@ public class MainActivity extends ActionBarActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private EPGFragment mEPG;
     private RecordFragment mRecord;
+    private int activeFragment = 1;
 
     private int mHours, mMinutes;
 
@@ -87,6 +87,7 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void onSectionAttached(int number) {
+        activeFragment = number;
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
@@ -112,8 +113,13 @@ public class MainActivity extends ActionBarActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.epg, menu);
-            restoreActionBar();
+            if(activeFragment == 2) {
+                getMenuInflater().inflate(R.menu.scheduled, menu);
+                restoreActionBar();
+            } else {
+                getMenuInflater().inflate(R.menu.epg, menu);
+                restoreActionBar();
+            }
             return true;
         }
         return super.onCreateOptionsMenu(menu);

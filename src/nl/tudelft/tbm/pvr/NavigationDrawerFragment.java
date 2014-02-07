@@ -243,9 +243,12 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        switch (item.getItemId()) {
-            case R.id.action_example:
-                Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()) {//TODO implement!
+            case R.id.updateChannel:
+                Toast.makeText(getActivity(), "Reloading channels.", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.clearList:
+                Toast.makeText(getActivity(), "Cleared scheduled list.", Toast.LENGTH_SHORT).show();
                 return true;
         }
 
