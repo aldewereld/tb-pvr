@@ -23,7 +23,7 @@
             android:layout_width="15dp"
             android:layout_gravity="right"
             android:id="@+id/recordIcon"
-            android:src="@android:drawable/ic_notification_overlay"
+            android:src="@android:drawable/ic_delete"
             android:contentDescription="@string/popupRecordButton"/>
 
         <TableLayout
