@@ -10,7 +10,6 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,6 +68,8 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
         windowManager.getDefaultDisplay().getMetrics(metrics);
         int screenWidth = metrics.widthPixels;
 
+        Channel channel = channels.get(position);
+
         if(startIndex >= 0) {
             int index = startIndex;
 
@@ -76,7 +77,7 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
                 if(index >= channels.get(position).getPrograms().size())
                     break;
                 Program program = channels.get(position).getPrograms().get(index);
-                ProgramView newProgram = new ProgramView(context, program, calculateDuration(program));
+                ProgramView newProgram = new ProgramView(context, channel, program, calculateDuration(program));
 
                 //newProgram.setOnClickListener(new CustomListener(newProgram));
                 newProgram.setOnClickListener(new ProgramDetails(context, newProgram));
@@ -89,7 +90,7 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
 
         if(screenWidth > 0) {
             Program program = new Program("No data", "", "", "", mDate, mDate);
-            ProgramView newProgram = new ProgramView(context, program, screenWidth);
+            ProgramView newProgram = new ProgramView(context, channel, program, screenWidth);
             programs.addView(newProgram);
         }
 

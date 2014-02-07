@@ -63,6 +63,9 @@ public class ProgramDetails implements View.OnClickListener {
         //description
         TextView description = (TextView) pView.findViewById(R.id.description);
         description.setText(program.getProgram().getDescription());
+        //channel
+        TextView channel = (TextView) pView.findViewById(R.id.channelTitle);
+        channel.setText(program.getChannel().getName());
         //airtime
         TextView airtime = (TextView) pView.findViewById(R.id.airTime);
         String time = "";

@@ -1,18 +1,11 @@
 package nl.tudelft.tbm.pvr.view;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Color;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import java.util.StringTokenizer;
-
 import nl.tudelft.tbm.pvr.R;
+import nl.tudelft.tbm.pvr.data.Channel;
 import nl.tudelft.tbm.pvr.data.Constant;
 import nl.tudelft.tbm.pvr.data.Program;
 
@@ -24,15 +17,17 @@ public class ProgramView extends CustomView {
 
     private String subtitle;
     private Program program;
+    private Channel channel;
 
     public ProgramView(Context context) {
         super(context);
     }
 
-    public ProgramView(Context context, Program program, int duration) {
+    public ProgramView(Context context, Channel channel, Program program, int duration) {
         super(context);
 
         this.program = program;
+        this.channel = channel;
         this.title = program.getTitle();
         if(duration < 15) {
             this.title = "...";
@@ -81,5 +76,6 @@ public class ProgramView extends CustomView {
             setColorBackground(Color.BLACK);
     }
 
-    public Program getProgram() {   return program; }
+    public Program getProgram() {       return program; }
+    public Channel getChannel() {   return channel; }
 }
