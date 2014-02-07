@@ -19,7 +19,6 @@ import java.util.Calendar;
 
 import nl.tudelft.tbm.pvr.data.Channel;
 import nl.tudelft.tbm.pvr.data.Program;
-import nl.tudelft.tbm.pvr.view.TimeHeaderView;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, TimePickerDialog.OnTimeSetListener {
@@ -32,8 +31,6 @@ public class MainActivity extends ActionBarActivity
     private RecordFragment mRecord;
 
     private int mHours, mMinutes;
-
-    private FrameLayout mLayout;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -140,20 +137,44 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void increaseTimeView(View v) {
-        LinearLayout timeline = (LinearLayout) findViewById(R.id.timeHeaderContainer);
+        LinearLayout timeLine = (LinearLayout) findViewById(R.id.timeHeaderContainer);
 
-        String[] firstTime =  ((TimeHeaderView)timeline.getChildAt(0)).getTitle().split(":");
-        String[] lastTime = ((TimeHeaderView)timeline.getChildAt(timeline.getChildCount()-1)).getTitle().split(":");
-
-        int newHour = (Integer.parseInt(lastTime[0]) - Integer.parseInt(firstTime[0]))/2;//TODO deal with time overflow at midnight
-        newHour += Integer.parseInt(firstTime[0])-1;
-        int newMinute = Integer.parseInt(firstTime[0]);
+        int timeCount = (timeLine.getChildCount() / 2) - 2;//remove two extra hours
+        int newHour, newMinute = mMinutes;
+        newHour = mHours;
+        if(timeCount % 2 == 1) {//odd number of steps
+            newMinute += 30;//add 30 minutes
+            newHour++;//add an hour
+            newMinute = newMinute % 60;//round to 0 if hour is full
+            timeCount--;//make timeCount even
+        }
+        newHour += timeCount/2;//add half the number of blocks to hours
+        //TODO when rounding to 0, set day to next (if possible; otherwise, block)
+        newHour = newHour % 24;//set to 0 when day is finished
 
         onTimeSet(null, newHour, newMinute);
     }
 
     public void decreaseTimeView(View v) {
-        System.err.println("Decrease Time was clicked!");
+        LinearLayout timeLine = (LinearLayout) findViewById(R.id.timeHeaderContainer);
+
+        int timeCount = (timeLine.getChildCount() / 2) - 2;//remove two extra hours
+        int newHour = mHours, newMinute = mMinutes;
+        if(timeCount % 2 == 1) {//odd number of steps
+            if(newMinute != 0)
+                newMinute = 0;
+            else {
+                newMinute = 30;
+                newHour--;
+            }
+            timeCount--;//make timeCount even
+        }
+        newHour -= timeCount/2;
+        //TODO when going below 0, move to previous day (if possible, otherwise block)
+        if(newHour < 0)
+            newHour = 24 + newHour;
+
+        onTimeSet(null, newHour, newMinute);
     }
 
     @Override
