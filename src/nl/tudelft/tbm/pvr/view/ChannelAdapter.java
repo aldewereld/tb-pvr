@@ -42,16 +42,7 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
         View rowView = inflater.inflate(R.layout.channel_layout, parent, false);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
-        //set icon TODO: Add other channel icons
-        String s = channels.get(position).getName();
-        if(s.startsWith("Nederland 1")) {
-            imageView.setImageResource(R.drawable.ic_ned1);
-        } else if (s.startsWith("Nederland 2")) {
-            imageView.setImageResource(R.drawable.ic_ned2);
-        } else if (s.startsWith("Nederland 3")) {
-            imageView.setImageResource(R.drawable.ic_ned3);
-        }
-
+        imageView.setImageBitmap(channels.get(position).getIcon());
 
         LinearLayout programs = (LinearLayout) rowView.findViewById(R.id.programs);
         int startIndex = -1;

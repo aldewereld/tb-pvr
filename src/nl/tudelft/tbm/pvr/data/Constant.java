@@ -38,4 +38,10 @@ public class Constant {
             return unknown;
         }
     }
+
+    //channel icon urls:
+    public static String nederland1 = "http://graphics.tudelft.nl/~paul/logos/gif/64x64/ned1.gif";
+    public static String nederland2 = "http://graphics.tudelft.nl/~paul/logos/gif/64x64/ned2.gif";
+    public static String nederland3 = "http://graphics.tudelft.nl/~paul/logos/gif/64x64/ned3.gif";
+    public static String rtl4 = "http://graphics.tudelft.nl/~paul/logos/gif/64x64/rtl4.gif";
 }
