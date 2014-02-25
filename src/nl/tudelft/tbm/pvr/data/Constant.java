@@ -77,6 +77,7 @@ public class Constant {
         if(name.equals("RTL 8")) return R.drawable.ic_rtl8;
         if(name.equals("NET 5")) return R.drawable.ic_net5;
         if(name.equals("SBS 6")) return R.drawable.ic_sbs6;
+        if(name.equals("Veronica")) return R.drawable.ic_veronica;
         if(name.equals("Discovery Channel")) return R.drawable.ic_discovery;
 
         return R.drawable.ic_no_icon;
