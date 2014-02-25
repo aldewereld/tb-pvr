@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import nl.tudelft.tbm.pvr.data.Channel;
 import nl.tudelft.tbm.pvr.data.Program;
@@ -82,7 +83,10 @@ public class EPGFragment extends Fragment {
     }
 
     public void setChannels(ArrayList<Channel> channels) {
-        this.channels = channels;
+        this.channels.clear();
+        this.channels.addAll(channels);
+        Collections.sort(this.channels);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void setTime(int hours, int minutes) {
