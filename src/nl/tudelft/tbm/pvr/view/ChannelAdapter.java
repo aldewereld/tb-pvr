@@ -18,6 +18,7 @@ import java.util.StringTokenizer;
 
 import nl.tudelft.tbm.pvr.R;
 import nl.tudelft.tbm.pvr.data.Channel;
+import nl.tudelft.tbm.pvr.data.Constant;
 import nl.tudelft.tbm.pvr.data.Program;
 
 /**
@@ -41,8 +42,7 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.channel_layout, parent, false);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-
-        imageView.setImageBitmap(channels.get(position).getIcon());
+        imageView.setImageDrawable(parent.getResources().getDrawable(Constant.getIcon(channels.get(position).getName())));
 
         LinearLayout programs = (LinearLayout) rowView.findViewById(R.id.programs);
         int startIndex = -1;
@@ -71,7 +71,7 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
                 ProgramView newProgram = new ProgramView(context, channel, program, calculateDuration(program));
 
                 //newProgram.setOnClickListener(new CustomListener(newProgram));
-                newProgram.setOnClickListener(new ProgramDetails(context, newProgram));
+//                newProgram.setOnClickListener(new ProgramDetails(context, newProgram));
 
                 programs.addView(newProgram);
                 screenWidth -= newProgram.getSize();
