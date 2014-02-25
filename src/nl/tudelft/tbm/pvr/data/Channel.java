@@ -22,4 +22,5 @@ public class Channel {
     public ArrayList<Program> getPrograms() { return programs;    }
     public Bitmap getIcon() { return icon; }
     public void setIcon(Bitmap icon) {  this.icon = icon;   }
+    public void addProgram(Program program) { programs.add(program); }
 }
