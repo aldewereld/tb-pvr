@@ -1,7 +1,5 @@
 package nl.tudelft.tbm.pvr.data;
 
-import android.graphics.Bitmap;
-
 import java.util.ArrayList;
 
 /**
@@ -10,7 +8,6 @@ import java.util.ArrayList;
  */
 public class Channel implements Comparable<Channel> {
     private String name;
-    Bitmap icon;
     private ArrayList<Program> programs = new ArrayList<Program>();
 
     public Channel(String name, ArrayList<Program> programs) {
@@ -20,8 +17,6 @@ public class Channel implements Comparable<Channel> {
 
     public String getName() {   return name;    }
     public ArrayList<Program> getPrograms() { return programs;    }
-    public Bitmap getIcon() { return icon; }
-    public void setIcon(Bitmap icon) {  this.icon = icon;   }
     public void addProgram(Program program) { programs.add(program); }
 
     @Override
