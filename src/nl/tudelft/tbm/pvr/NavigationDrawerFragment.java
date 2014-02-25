@@ -245,7 +245,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         switch (item.getItemId()) {//TODO implement!
             case R.id.updateChannel:
-                Toast.makeText(getActivity(), "Reloading channels.", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).updateChannels();
                 return true;
             case R.id.clearList:
                 Toast.makeText(getActivity(), "Cleared scheduled list.", Toast.LENGTH_SHORT).show();
