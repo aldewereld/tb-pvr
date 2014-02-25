@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Huib Aldewereld
  * Datatype to represent Channels
  */
-public class Channel {
+public class Channel implements Comparable<Channel> {
     private String name;
     Bitmap icon;
     private ArrayList<Program> programs = new ArrayList<Program>();
@@ -23,4 +23,12 @@ public class Channel {
     public Bitmap getIcon() { return icon; }
     public void setIcon(Bitmap icon) {  this.icon = icon;   }
     public void addProgram(Program program) { programs.add(program); }
+
+    @Override
+    public int compareTo(Channel channel) {
+
+        int myIndex = Constant.channelIndex(name);
+        int hisIndex = Constant.channelIndex(channel.getName());
+        return myIndex - hisIndex;
+    }
 }

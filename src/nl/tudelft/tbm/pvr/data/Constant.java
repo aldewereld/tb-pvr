@@ -18,6 +18,10 @@ public class Constant {
     public static int[] sports = new int[]{Color.rgb(60,150,20), Color.rgb(80,200,25)};
     public static int[] amusement = new int[]{Color.rgb(0,0,0), Color.rgb(0,0,0)};//TODO
     public static int[] unknown = new int[]{Color.rgb(100,100,100),Color.rgb(150,150,150)};
+    //public static int[] science = new int[]{Color.rgb(), Color.rgb()};
+    //public static int[] children = new int[]{Color.rgb(), Color.rgb()};
+    //public static int[] adult = new int[]{Color.rgb(), Color.rgb()};
+    //public static int[] religion = new int[]{Color.rgb(), Color.rgb()};
 
     public static int[] timeHeader = new int[]{Color.rgb(15,20,135), Color.rgb(15,20,200)};
 
@@ -26,17 +30,28 @@ public class Constant {
             return actuality;
         } else if (category.equals("Drama")) {
             return drama;
-        } else if (category.equals("Nieuws")) {
+        } else if (category.equals("News")) {
             return news;
         } else if (category.equals("Talk")) {
             return talk;
-        } else if (category.equals("Education")) {
+        } else if (category.equals("Educational")) {
             return education;
         } else if (category.equals("Sports")) {
             return sports;
+        } else if (category.equals("Amusement")) {
+            return amusement;
         } else {
             return unknown;
         }
+    }
+
+    public static String[] channelOrder = {"Nederland 1", "Nederland 2", "Nederland 3", "RTL 4", "RTL 5", "SBS 6", "RTL 7", "RTL 8", "NET 5", "Veronica", "Discovery Channel",
+                                            "National Geographic", "Eén", "Canvas", "BBC 1", "BBC 2", "Eurosport"};
+    public static int channelIndex(String name) {
+        for(int i = 0; i < channelOrder.length; i++) {
+            if(channelOrder[i].equals(name)) return i;
+        }
+        return Integer.MAX_VALUE;
     }
 
     //channel icon urls:
