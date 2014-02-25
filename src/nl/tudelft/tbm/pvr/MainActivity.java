@@ -71,7 +71,6 @@ public class MainActivity extends ActionBarActivity
     public void updateChannels() {
         ReadChannels task = new ReadChannels();
         task.execute();
-        System.out.println("Finished update");
     }
 
     @Override
@@ -218,9 +217,6 @@ public class MainActivity extends ActionBarActivity
         protected ArrayList<Channel> doInBackground(Void... params) {
             ChannelParserInterface parser = new ChannelParser();
             ArrayList<Channel> channels = parser.createChannels();
-            for(Channel chan : channels) {
-                System.err.println("Channel "+chan.getName()+" has "+chan.getPrograms().size()+" programs.");
-            }
 
             return channels;
         }
@@ -233,7 +229,6 @@ public class MainActivity extends ActionBarActivity
             if(!success.isEmpty()) {
                 channels = success;
                 mEPG.setChannels(channels);
-                Toast.makeText(getApplicationContext(), "Complete!", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_LONG).show();
             }
