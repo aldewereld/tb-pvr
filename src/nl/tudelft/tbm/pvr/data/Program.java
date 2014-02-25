@@ -13,15 +13,19 @@ public class Program {
     private String subtitle;
     private String description;
     private String category;
-    private String startTime, endTime;//ISO format: YYYY-MM-DDTHH:MM, e.g., 2014-01-16T12:00
+    private String startTime, endTime;//ISO format: YYYYMMDDHHMMSS +ZONE, e.g., 20140227190500 +0100
 
     public Program(String title, String subtitle, String description, String category, String startTime, String endTime) {
         this.title = title;
         this.subtitle = subtitle;
         this.description = description;
         this.category = category;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        if(!startTime.contains("-"))
+            this.startTime = startTime.substring(0,4)+"-"+startTime.substring(4,6)+"-"+startTime.substring(6,8)+"T"+startTime.substring(8,10)+":"+startTime.substring(10,12);
+        else this.startTime = startTime;
+        if(!endTime.contains("-"))
+            this.endTime = endTime.substring(0,4)+"-"+endTime.substring(4,6)+"-"+endTime.substring(6,8)+"T"+endTime.substring(8,10)+":"+endTime.substring(10,12);
+        else this.endTime = endTime;
     }
 
     private static int calculateDuration(String startTime, String endTime) {
@@ -31,9 +35,8 @@ public class Program {
         Calendar endCal = new GregorianCalendar(Integer.parseInt(endTok.nextToken()), Integer.parseInt(endTok.nextToken()), Integer.parseInt(endTok.nextToken()), Integer.parseInt(endTok.nextToken()), Integer.parseInt(endTok.nextToken()));
 
         long millis = endCal.getTimeInMillis() - startCal.getTimeInMillis();
-        int duration = (int) (millis / 1000 / 60);// 1000 milliseconds per second, 60 seconds per minute.
 
-        return duration;
+        return (int) (millis / 1000 / 60);// 1000 milliseconds per second, 60 seconds per minute.
     }
 
     public String getTitle() {  return title;   }
