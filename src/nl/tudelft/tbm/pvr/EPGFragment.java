@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import nl.tudelft.tbm.pvr.data.Channel;
-import nl.tudelft.tbm.pvr.data.Program;
 import nl.tudelft.tbm.pvr.view.ChannelAdapter;
 import nl.tudelft.tbm.pvr.view.TimeHeaderView;
 
@@ -43,27 +42,6 @@ public class EPGFragment extends Fragment {
 
         /* TEST CODE TODO: Remove*/
         ListView channelList = (ListView) rootView.findViewById(R.id.channelList);
-        ArrayList<Program> ned1 = new ArrayList<Program>();
-        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-29T23:55Z","2014-01-30T00:15Z"));
-        ned1.add(new Program("Paul & Witteman", "", "", "Talk", "2014-01-30T00:15Z", "2014-01-30T01:15Z"));
-        ned1.add(new Program("Een Vandaag", "", "", "Actualiteit", "2014-01-30T01:15Z", "2014-01-30T01:45Z"));
-        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T01:45Z", "2014-01-30T02:00Z"));
-        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T02:00Z", "2014-01-30T02:27Z"));
-        ned1.add(new Program("NOS Tekst TV", "", "", "Actualiteit", "2014-01-30T02:27Z", "2014-01-30T05:55Z"));
-        ned1.add(new Program("Nederland in Beweging!", "", "", "Sports", "2014-01-30T05:55Z", "2014-01-30T06:10Z"));
-        ned1.add(new Program("Max Geheugentrainer", "", "", "Amusement", "2014-01-30T06:10Z", "2014-01-30T06:30Z"));
-        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T06:30Z", "2014-01-30T07:00Z"));
-        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T07:00Z", "2014-01-30T07:10Z"));
-        ned1.add(new Program("Vandaag de Dag", "", "", "Actualiteit", "2014-01-30T07:10Z", "2014-01-30T07:30Z"));
-        ned1.add(new Program("NOS Journaal", "", "", "Nieuws", "2014-01-30T07:30Z", "2014-01-30T07:40Z"));
-        ned1.add(new Program("Vandaag de Dag", "", "", "Actualiteit", "2014-01-30T07:40Z", "2014-01-30T08:00Z"));
-
-        channels.clear();
-
-        channels.add(new Channel("Nederland 1", ned1));
-        channels.add(new Channel("Nederland 2", new ArrayList<Program>()));
-        channels.add(new Channel("Nederland 3", new ArrayList<Program>()));
-        channels.add(new Channel("RTL 4", new ArrayList<Program>()));
         channelList.setAdapter(mAdapter);
 
         return rootView;
