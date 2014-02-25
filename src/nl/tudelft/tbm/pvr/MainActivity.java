@@ -1,6 +1,8 @@
 package nl.tudelft.tbm.pvr;
 
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.os.AsyncTask;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -12,12 +14,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import nl.tudelft.tbm.pvr.data.Channel;
 import nl.tudelft.tbm.pvr.data.Program;
+import nl.tudelft.tbm.pvr.util.ChannelParser;
+import nl.tudelft.tbm.pvr.util.ChannelParserInterface;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, TimePickerDialog.OnTimeSetListener {
@@ -59,6 +64,14 @@ public class MainActivity extends ActionBarActivity
             mMinutes = 30;
         else
             mMinutes = 0;
+
+        updateChannels();
+    }
+
+    public void updateChannels() {
+        ReadChannels task = new ReadChannels();
+        task.execute();
+        System.out.println("Finished update");
     }
 
     @Override
@@ -70,7 +83,6 @@ public class MainActivity extends ActionBarActivity
                 if(mEPG == null) {
                     mEPG = new EPGFragment();
                 }
-                mEPG.setChannels(channels);
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, mEPG)
                         .commit();
@@ -190,5 +202,41 @@ public class MainActivity extends ActionBarActivity
 
             //update the view!!
             mEPG.drawTimeLine((LinearLayout) findViewById(R.id.timeHeaderContainer), mHours, mMinutes);
+    }
+
+    public class ReadChannels extends AsyncTask<Void,Boolean,ArrayList<Channel>> {
+        private final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            this.dialog.setMessage("Updating channel information...");
+            this.dialog.show();
+
+        }
+
+        @Override
+        protected ArrayList<Channel> doInBackground(Void... params) {
+            ChannelParserInterface parser = new ChannelParser();
+            ArrayList<Channel> channels = parser.createChannels();
+            for(Channel chan : channels) {
+                System.err.println("Channel "+chan.getName()+" has "+chan.getPrograms().size()+" programs.");
+            }
+
+            return channels;
+        }
+
+        @Override
+        protected void onPostExecute(final ArrayList<Channel> success) {
+            if(this.dialog.isShowing())
+                this.dialog.dismiss();
+
+            if(!success.isEmpty()) {
+                channels = success;
+                mEPG.setChannels(channels);
+                Toast.makeText(getApplicationContext(), "Complete!", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
