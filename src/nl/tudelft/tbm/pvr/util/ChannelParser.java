@@ -56,9 +56,15 @@ public class ChannelParser {
                     //create new channel
                     String id, name = "";
                     id = xpp.getAttributeValue(null, "id");
-                    while(eventType != XmlPullParser.END_TAG && xpp.getName().equals("channel")) {
-                        if(xpp.getName().equals("display-name"))
-                            name = xpp.getText();
+                    while(true) {
+                        if(eventType == XmlPullParser.END_TAG)
+                            if(xpp.getName().equals("channel"))//end of current tag found
+                                break;//stop the loop
+
+                        if(eventType == XmlPullParser.START_TAG)
+                            if(xpp.getName().equals("display-name"))
+                                name = xpp.nextText();
+
                         eventType = xpp.next();
                     }
                     //add the channel to the hashmap
@@ -75,11 +81,16 @@ public class ChannelParser {
                     start = xpp.getAttributeValue(null, "start");
                     stop = xpp.getAttributeValue(null, "stop");
                     channel = xpp.getAttributeValue(null, "channel");
-                    while (eventType != XmlPullParser.END_TAG && xpp.getName().equals("programme")) {
-                        if(xpp.getName().equals("title")) title = xpp.getText();
-                        if(xpp.getName().equals("desc")) description = xpp.getText();
-                        if(xpp.getName().equals("category")) category = xpp.getText();
-                        if(xpp.getName().equals("sub-title")) subtitle = xpp.getText();
+                    while(true) {
+                        if(eventType == XmlPullParser.END_TAG)
+                            if(xpp.getName().equals("programme"))//end of current tag found
+                                break;//stop this loop
+                        if(eventType == XmlPullParser.START_TAG) {
+                            if(xpp.getName().equals("title")) title = xpp.nextText();
+                            if(xpp.getName().equals("desc")) description = xpp.nextText();
+                            if(xpp.getName().equals("category")) category = xpp.nextText();
+                            if(xpp.getName().equals("sub-title")) subtitle = xpp.nextText();
+                        }
 
                         eventType = xpp.next();
                     }
@@ -94,6 +105,9 @@ public class ChannelParser {
             eventType = xpp.next();
         }
 
-        return (ArrayList<Channel>) channels.values();
+        ArrayList<Channel> result = new ArrayList<Channel>();
+        result.addAll(channels.values());
+
+        return result;
     }
 }
