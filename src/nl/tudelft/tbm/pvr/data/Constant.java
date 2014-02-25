@@ -2,6 +2,8 @@ package nl.tudelft.tbm.pvr.data;
 
 import android.graphics.Color;
 
+import nl.tudelft.tbm.pvr.R;
+
 /**
  * @author Huib Aldewereld
  * Java file containing constants that are used throughout the project.
@@ -18,10 +20,11 @@ public class Constant {
     public static int[] sports = new int[]{Color.rgb(60,150,20), Color.rgb(80,200,25)};
     public static int[] amusement = new int[]{Color.rgb(0,0,0), Color.rgb(0,0,0)};//TODO
     public static int[] unknown = new int[]{Color.rgb(100,100,100),Color.rgb(150,150,150)};
-    //public static int[] science = new int[]{Color.rgb(), Color.rgb()};
-    //public static int[] children = new int[]{Color.rgb(), Color.rgb()};
-    //public static int[] adult = new int[]{Color.rgb(), Color.rgb()};
-    //public static int[] religion = new int[]{Color.rgb(), Color.rgb()};
+    public static int[] science = new int[]{Color.rgb(38,128,77), Color.rgb(89,179,128)};
+    public static int[] children = new int[]{Color.rgb(168,1,5), Color.rgb(217,54,57)};
+    public static int[] religion = new int[]{Color.rgb(124,65,130), Color.rgb(176,127,181)};
+    public static int[] cultuur = new int[]{Color.rgb(123,18,98), Color.rgb(173,61,147)};
+    public static int[] film = new int[]{Color.rgb(130,144,144), Color.rgb(194,194,194)};
 
     public static int[] timeHeader = new int[]{Color.rgb(15,20,135), Color.rgb(15,20,200)};
 
@@ -40,6 +43,16 @@ public class Constant {
             return sports;
         } else if (category.equals("Amusement")) {
             return amusement;
+        } else if (category.equals("Science/Nature")) {
+            return science;
+        } else if (category.equals("Children")) {
+            return children;
+        } else if (category.equals("Religion")) {
+            return religion;
+        } else if (category.equals("Music")) {
+            return cultuur;
+        } else if (category.equals("Film")) {
+            return film;
         } else {
             return unknown;
         }
@@ -54,9 +67,18 @@ public class Constant {
         return Integer.MAX_VALUE;
     }
 
-    //channel icon urls:
-    public static String nederland1 = "http://graphics.tudelft.nl/~paul/logos/gif/64x64/ned1.gif";
-    public static String nederland2 = "http://graphics.tudelft.nl/~paul/logos/gif/64x64/ned2.gif";
-    public static String nederland3 = "http://graphics.tudelft.nl/~paul/logos/gif/64x64/ned3.gif";
-    public static String rtl4 = "http://graphics.tudelft.nl/~paul/logos/gif/64x64/rtl4.gif";
+    public static int getIcon(String name) {
+        if(name.equals("Nederland 1")) return R.drawable.ic_ned1;
+        if(name.equals("Nederland 2")) return R.drawable.ic_ned2;
+        if(name.equals("Nederland 3")) return R.drawable.ic_ned3;
+        if(name.equals("RTL 4")) return R.drawable.ic_rtl4;
+        if(name.equals("RTL 5")) return R.drawable.ic_rtl5;
+        if(name.equals("RTL 7")) return R.drawable.ic_rtl7;
+        if(name.equals("RTL 8")) return R.drawable.ic_rtl8;
+        if(name.equals("NET 5")) return R.drawable.ic_net5;
+        if(name.equals("SBS 6")) return R.drawable.ic_sbs6;
+        if(name.equals("Discovery Channel")) return R.drawable.ic_discovery;
+
+        return R.drawable.ic_no_icon;
+    }
 }
