@@ -15,7 +15,7 @@ import nl.tudelft.tbm.pvr.data.Program;
 /**
  * @author Huib Aldewereld
  */
-public class ChannelParser {
+public class ChannelParser implements ChannelParserInterface {
 
     public ArrayList<Channel> createChannels() {
         return openXmlStream("http://ict1.tbm.tudelft.nl/epg.xml");
