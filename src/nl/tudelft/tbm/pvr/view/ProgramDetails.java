@@ -20,15 +20,25 @@ import nl.tudelft.tbm.pvr.R;
  * @author Huib Aldewereld
  */
 public class ProgramDetails implements View.OnClickListener {
+    private Context context;
     private ProgramView program;
     private View pView;
     private PopupWindow popup;
     private Button record, close;
     private Animation appear;
 
-    public ProgramDetails(Context context, ProgramView program) {
-        this.program = program;
+    public ProgramDetails(Context context) {
+        this.context = context;
+    }
 
+    public void onClick(View v) {
+        if(!(v instanceof ProgramView)) {
+            System.err.println("Unknown view clicked!");
+            return;
+        }
+        program = (ProgramView) v;
+
+        //create the popup
         final float scale = context.getResources().getDisplayMetrics().density;
         pView = ((LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.popup_view, null);
@@ -39,7 +49,11 @@ public class ProgramDetails implements View.OnClickListener {
         popup.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.shape_window_dim));
         popup.setOutsideTouchable(true);
 
+        //set contents
         setDetails();
+
+        //show
+        showAtLocation(pView);
     }
 
     public void showAtLocation(View v) {
@@ -49,10 +63,6 @@ public class ProgramDetails implements View.OnClickListener {
 
     public void dismiss(){
         popup.dismiss();
-    }
-
-    public void onClick(View v) {
-        showAtLocation(pView);
     }
 
     private void setDetails() {

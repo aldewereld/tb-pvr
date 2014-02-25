@@ -60,6 +60,7 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
         int screenWidth = metrics.widthPixels;
 
         Channel channel = channels.get(position);
+        View.OnClickListener listener = new ProgramDetails(context);
 
         if(startIndex >= 0) {
             int index = startIndex;
@@ -70,8 +71,7 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
                 Program program = channels.get(position).getPrograms().get(index);
                 ProgramView newProgram = new ProgramView(context, channel, program, calculateDuration(program));
 
-                //newProgram.setOnClickListener(new CustomListener(newProgram));
-                newProgram.setOnClickListener(new ProgramDetails(context, newProgram));
+                newProgram.setOnClickListener(listener);
 
                 programs.addView(newProgram);
                 screenWidth -= newProgram.getSize();
