@@ -1,9 +1,11 @@
 package nl.tudelft.tbm.pvr;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.NumberPicker;
@@ -58,9 +60,10 @@ public class TimePickerFragment extends DialogFragment {
             // override and do nothing
         }
 
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         @Override
         protected void onCreate(Bundle savedInstanceState)
-        {//TODO: API lvl 9 fix!
+        {
             super.onCreate(savedInstanceState);
             try
             {
