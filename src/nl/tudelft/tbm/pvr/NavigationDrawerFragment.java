@@ -243,11 +243,11 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        switch (item.getItemId()) {//TODO implement!
+        switch (item.getItemId()) {
             case R.id.updateChannel:
                 ((MainActivity)getActivity()).updateChannels();
                 return true;
-            case R.id.clearList:
+            case R.id.clearList://TODO implement!
                 Toast.makeText(getActivity(), "Cleared scheduled list.", Toast.LENGTH_SHORT).show();
                 return true;
         }
