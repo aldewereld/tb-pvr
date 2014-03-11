@@ -39,6 +39,22 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:text="@string/date"
+                    android:textAppearance="@style/textLarge"/>
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="@style/textNormal"
+                    android:id="@+id/date"/>
+                </TableRow>
+
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
                     android:text="@string/popupAirtime"
                     android:textAppearance="@style/textLarge"
                     />

@@ -86,10 +86,13 @@ public class ProgramDetails implements View.OnClickListener {
         end.nextToken();//discard first (date)
         time += " to " + end.nextToken();
         airtime.setText(time);
+        //date
+        TextView date = (TextView) pView.findViewById(R.id.date);
+        date.setText(program.getProgram().getStartTime().substring(0,10));
 
         if(program.getProgram().getSubtitle().equals("")) {
             TableLayout table = (TableLayout) pView.findViewById(R.id.table);
-            table.removeViewAt(3);
+            table.removeViewAt(4);
         } else {
             //subtitle
             TextView subtitle = (TextView) pView.findViewById(R.id.subTitle);

@@ -35,4 +35,5 @@
     <string name="popupClose">Close</string>
     <string name="popupRecord">Record</string>
     <string name="popupRecordButton">Record status</string>
+    <string name="date">Date:</string>
 </resources>
