@@ -18,7 +18,7 @@ public class Constant {
     public static int[] talk = new int[]{Color.rgb(60,50,170), Color.rgb(145,135,230)};
     public static int[] education = new int[]{Color.rgb(200,200,200), Color.rgb(225,225,225)};
     public static int[] sports = new int[]{Color.rgb(60,150,20), Color.rgb(80,200,25)};
-    public static int[] amusement = new int[]{Color.rgb(0,0,0), Color.rgb(0,0,0)};//TODO
+    public static int[] amusement = new int[]{Color.rgb(160,160,0), Color.rgb(110,110,0)};
     public static int[] unknown = new int[]{Color.rgb(100,100,100),Color.rgb(150,150,150)};
     public static int[] science = new int[]{Color.rgb(38,128,77), Color.rgb(89,179,128)};
     public static int[] children = new int[]{Color.rgb(168,1,5), Color.rgb(217,54,57)};
@@ -50,6 +50,8 @@ public class Constant {
         } else if (category.equals("Religion")) {
             return religion;
         } else if (category.equals("Music")) {
+            return cultuur;
+        } else if (category.equals("Arts/Culture")) {
             return cultuur;
         } else if (category.equals("Film")) {
             return film;
