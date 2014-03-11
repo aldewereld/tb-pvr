@@ -28,7 +28,7 @@ import nl.tudelft.tbm.pvr.data.Program;
 public class ChannelAdapter extends ArrayAdapter<Channel> {
     private final Context context;
     private final ArrayList<Channel> channels;
-    private String mDate = "2014-01-30T00:00Z";
+    private String mDate = "2014-01-01T00:00Z";
 
     public ChannelAdapter(Context context, ArrayList<Channel> channels) {
         super(context, R.layout.channel_layout, channels);
