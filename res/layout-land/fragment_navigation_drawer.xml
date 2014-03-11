@@ -5,7 +5,7 @@
     android:choiceMode="multipleChoice"
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
-    android:background="#cccc"
+    android:background="#007EA8"
     tools:context="nl.tudelft.tbm.pvr.NavigationDrawerFragment"
     android:id="@+id/navigationList"
     android:clickable="true"

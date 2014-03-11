@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainEPG"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,11 +7,85 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".EPG$PlaceholderFragment">
+    android:background="#0099cc"
+    tools:context=".epg_activity$PlaceholderFragment">
+
+    <Spinner
+        android:id="@+id/dayButton"
+        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:drawable/btn_dropdown"/>
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/dayButton"
+        android:id="@+id/timeButton"
+        android:background="@android:drawable/btn_dropdown"
+        android:onClick="showTimePickerDialog"/>
 
     <TextView
-        android:id="@+id/section_label"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/timeButton"
+        android:layout_alignBaseline="@+id/timeButton"
+        android:text="@string/time"
+        android:id="@+id/epgTime"
+        android:textAppearance="@style/textLarge" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/textLarge"
+        android:text="@string/channels"
+        android:id="@+id/channels"
+        android:layout_below="@+id/dayButton"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeLeft"
+        android:layout_toRightOf="@+id/channels"
+        android:layout_marginLeft="5dp"
+        android:layout_alignBottom="@+id/channels"
+        android:layout_alignTop="@+id/channels"
+        android:src="@drawable/abc_ic_go"
+        android:rotation="180"
+        android:onClick="decreaseTimeView"
+        android:contentDescription="@string/timeBack" />
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@+id/timeLeft"
+        android:layout_alignBottom="@+id/timeLeft"
+        android:layout_toLeftOf="@+id/timeRight"
+        android:layout_alignTop="@+id/timeLeft"
+        android:id="@+id/timeHeaderContainer"></LinearLayout>
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/timeRight"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/channels"
+        android:layout_alignTop="@+id/channels"
+        android:src="@drawable/abc_ic_go"
+        android:onClick="increaseTimeView"
+        android:contentDescription="@string/timeForward" />
+
+    <ListView
+        android:id="@+id/channelList"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/channels"
+        android:layout_alignLeft="@+id/channels"
+        android:layout_alignRight="@+id/timeHeaderContainer">
+
+        </ListView>
 
 </RelativeLayout>
