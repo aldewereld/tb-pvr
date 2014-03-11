@@ -36,6 +36,7 @@ public class MainActivity extends ActionBarActivity
     private int activeFragment = 1;
 
     private int mHours, mMinutes;
+    private ArrayList<String> mDates = new ArrayList<String>();
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -157,17 +158,25 @@ public class MainActivity extends ActionBarActivity
         LinearLayout timeLine = (LinearLayout) findViewById(R.id.timeHeaderContainer);
 
         int timeCount = (timeLine.getChildCount() / 2) - 2;//remove two extra hours
+        if(timeCount < 1) timeCount = 1;//always take at least 1 step!
+        System.err.println("TimeCount = "+timeCount);
         int newHour, newMinute = mMinutes;
         newHour = mHours;
         if(timeCount % 2 == 1) {//odd number of steps
             newMinute += 30;//add 30 minutes
-            newHour++;//add an hour
-            newMinute = newMinute % 60;//round to 0 if hour is full
+            if(newMinute > 30) {//round to 0 if hour is full
+                newMinute = 0;
+                newHour++;
+            }
             timeCount--;//make timeCount even
         }
         newHour += timeCount/2;//add half the number of blocks to hours
-        //TODO when rounding to 0, set day to next (if possible; otherwise, block)
-        newHour = newHour % 24;//set to 0 when day is finished
+        if(newHour > 23) {
+            if(mEPG.datesIndex() < mDates.size()) {
+                mEPG.setDate(mDates.get(mEPG.datesIndex()+1));
+                newHour = newHour % 24;
+            } else return;
+        }
 
         onTimeSet(null, newHour, newMinute);
     }
@@ -176,6 +185,7 @@ public class MainActivity extends ActionBarActivity
         LinearLayout timeLine = (LinearLayout) findViewById(R.id.timeHeaderContainer);
 
         int timeCount = (timeLine.getChildCount() / 2) - 2;//remove two extra hours
+        if(timeCount < 1) timeCount = 1;//always take at least 1 step
         int newHour = mHours, newMinute = mMinutes;
         if(timeCount % 2 == 1) {//odd number of steps
             if(newMinute != 0)
@@ -187,9 +197,14 @@ public class MainActivity extends ActionBarActivity
             timeCount--;//make timeCount even
         }
         newHour -= timeCount/2;
-        //TODO when going below 0, move to previous day (if possible, otherwise block)
-        if(newHour < 0)
-            newHour = 24 + newHour;
+        if(newHour < 0) {
+            if(mEPG.datesIndex() > 0) {
+                newHour = 24 + newHour;
+                mEPG.setDate(mDates.get(mEPG.datesIndex()-1));
+            } else {
+                newHour = 0;
+            }
+        }
 
         onTimeSet(null, newHour, newMinute);
     }
@@ -229,8 +244,20 @@ public class MainActivity extends ActionBarActivity
             if(!success.isEmpty()) {
                 channels = success;
                 mEPG.setChannels(channels);
+                setDates(success);
             } else {
                 Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        protected void setDates(ArrayList<Channel> channels) {
+            for(Program program : channels.get(0).getPrograms()) {//any list of programs should do, we just search the first channel's
+                String date = program.getEndTime().substring(0,10);
+                if(!mDates.contains(date))
+                    mDates.add(date);
+            }
+            if(!mDates.isEmpty()) {
+                mEPG.resetDates(mDates);
             }
         }
     }

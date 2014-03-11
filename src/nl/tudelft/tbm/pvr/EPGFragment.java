@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -27,20 +28,35 @@ public class EPGFragment extends Fragment {
 
     private ArrayList<Channel> channels = new ArrayList<Channel>();
     private int mHours, mMinutes;
+    private ArrayList<String> mDates = new ArrayList<String>();
+    private String mDate = "2014-01-01";
     private ChannelAdapter mAdapter;
+    private ArrayAdapter dayAdapter;
+    Spinner daySpinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_epg, container, false);
 
-        Spinner daySpinner = (Spinner) rootView.findViewById(R.id.dayButton);
-        String[] days = {"Today", "Tomorrow"};
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, days);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        daySpinner.setAdapter(adapter);
+        daySpinner = (Spinner) rootView.findViewById(R.id.dayButton);
+        mDates.add("2014-03-11"); mDates.add("2014-03-12");
+        dayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, mDates);
+        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        daySpinner.setAdapter(dayAdapter);
 
-        /* TEST CODE TODO: Remove*/
+        daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                setDate((String) daySpinner.getSelectedItem());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                System.err.println("Nothing selected");
+            }
+        });
+
         ListView channelList = (ListView) rootView.findViewById(R.id.channelList);
         channelList.setAdapter(mAdapter);
 
@@ -70,9 +86,29 @@ public class EPGFragment extends Fragment {
     public void setTime(int hours, int minutes) {
         mHours = hours;
         mMinutes = minutes;
-        String date = "2014-01-30T"+(mHours < 10?"0":"")+mHours+":"+(minutes == 0?"00":"30")+"Z";
+        String date = mDate + "T"+ (mHours < 10?"0":"")+mHours+":"+(mMinutes == 0?"00":"30")+"Z";
         mAdapter.setDate(date);
         mAdapter.notifyDataSetChanged();
+    }
+
+    public void setDate(String day) {
+        mDate = day;
+        daySpinner.setSelection(mDates.indexOf(mDate));
+        String date = mDate + "T"+ (mHours < 10?"0":"")+mHours+":"+(mMinutes == 0?"00":"30")+"Z";
+        mAdapter.setDate(date);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void resetDates(ArrayList<String> dates) {
+        mDates.clear();
+        for(String date : dates)
+            mDates.add(date);
+
+        dayAdapter.notifyDataSetChanged();
+    }
+
+    public int datesIndex() {//returns index of active selection
+        return mDates.indexOf(mDate);
     }
 
     public void drawTimeLine(LinearLayout container, int hours, int minutes) {
