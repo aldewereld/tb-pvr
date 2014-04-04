@@ -40,7 +40,6 @@ public class EPGFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_epg, container, false);
 
         daySpinner = (Spinner) rootView.findViewById(R.id.dayButton);
-        mDates.add("2014-03-11"); mDates.add("2014-03-12");
         dayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, mDates);
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
@@ -92,6 +91,8 @@ public class EPGFragment extends Fragment {
     }
 
     public void setDate(String day) {
+        if(mDate.equals(day))
+            return;//no need to change view if the day stays the same!
         mDate = day;
         daySpinner.setSelection(mDates.indexOf(mDate));
         String date = mDate + "T"+ (mHours < 10?"0":"")+mHours+":"+(mMinutes == 0?"00":"30")+"Z";
