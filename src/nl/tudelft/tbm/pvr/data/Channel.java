@@ -3,27 +3,20 @@ package nl.tudelft.tbm.pvr.data;
 import java.util.ArrayList;
 
 /**
- * @author Huib Aldewereld
- * Datatype to represent Channels
+ * @author [YOUR NAME HERE; include student number!]
  */
-public class Channel implements Comparable<Channel> {
-    private String name;
-    private ArrayList<Program> programs = new ArrayList<Program>();
+public class Channel implements ChannelInterface {
 
-    public Channel(String name, ArrayList<Program> programs) {
-        this.name = name;
-        this.programs = programs;
+    public String getName() {
+        //Pas deze methode aan!
+        return null;    //vergeet het return type niet
     }
 
-    public String getName() {   return name;    }
-    public ArrayList<Program> getPrograms() { return programs;    }
-    public void addProgram(Program program) { programs.add(program); }
-
-    @Override
-    public int compareTo(Channel channel) {
-
-        int myIndex = Constant.channelIndex(name);
-        int hisIndex = Constant.channelIndex(channel.getName());
-        return myIndex - hisIndex;
+    public ArrayList<Program> getPrograms() {
+        //Pas deze methode aan!
+        return null;    //vergeet het return type niet
+    }
+    public void addProgram(Program program) {
+        //Pas deze methode aan!
     }
 }
