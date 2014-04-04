@@ -29,6 +29,8 @@ public class Constant {
     public static int[] timeHeader = new int[]{Color.rgb(15,20,135), Color.rgb(15,20,200)};
 
     public static int[] getColor(String category) {
+        if(category == null)
+            return unknown;
         if (category.equals("Actualiteit")) {
             return actuality;
         } else if (category.equals("Drama")) {
@@ -70,6 +72,7 @@ public class Constant {
     }
 
     public static int getIcon(String name) {
+        if(name == null) return R.drawable.ic_no_icon;
         if(name.equals("Nederland 1")) return R.drawable.ic_ned1;
         if(name.equals("Nederland 2")) return R.drawable.ic_ned2;
         if(name.equals("Nederland 3")) return R.drawable.ic_ned3;

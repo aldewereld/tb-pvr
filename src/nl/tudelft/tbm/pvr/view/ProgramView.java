@@ -32,10 +32,11 @@ public class ProgramView extends CustomView {
         if(duration < 15) {
             this.title = "...";
         } else {
-            if(!program.getSubtitle().equals(""))
-                subtitle = program.getSubtitle();
-            else
-                subtitle = program.getCategory();
+            if(program.getSubtitle() != null)
+                if(!program.getSubtitle().equals(""))
+                    subtitle = program.getSubtitle();
+                else
+                    subtitle = program.getCategory();
         }
         setCategoryColor(Constant.getColor(program.getCategory()));
         setCornerRadius(10);

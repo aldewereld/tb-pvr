@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import nl.tudelft.tbm.pvr.data.Channel;
 import nl.tudelft.tbm.pvr.view.ChannelAdapter;
@@ -78,7 +77,7 @@ public class EPGFragment extends Fragment {
     public void setChannels(ArrayList<Channel> channels) {
         this.channels.clear();
         this.channels.addAll(channels);
-        Collections.sort(this.channels);
+        //Collections.sort(this.channels);//Only works when channels are made comparable!
         mAdapter.notifyDataSetChanged();
     }
 

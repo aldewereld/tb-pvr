@@ -46,12 +46,15 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
 
         LinearLayout programs = (LinearLayout) rowView.findViewById(R.id.programs);
         int startIndex = -1;
-        for(int i = 0; i < channels.get(position).getPrograms().size(); i++) {
-            Program program = channels.get(position).getPrograms().get(i);
-            if(isStartProgram(program)) {
-                startIndex = i;
+        if(channels.get(position).getPrograms() == null) {
+             startIndex = -1;
+        } else
+            for(int i = 0; i < channels.get(position).getPrograms().size(); i++) {
+                Program program = channels.get(position).getPrograms().get(i);
+                if(isStartProgram(program)) {
+                    startIndex = i;
+                }
             }
-        }
 
         DisplayMetrics metrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context

@@ -251,6 +251,8 @@ public class MainActivity extends ActionBarActivity
         }
 
         protected void setDates(ArrayList<Channel> channels) {
+            if(channels.get(0).getPrograms() == null)
+                return;
             for(Program program : channels.get(0).getPrograms()) {//any list of programs should do, we just search the first channel's
                 String date = program.getEndTime().substring(0,10);
                 if(!mDates.contains(date))
