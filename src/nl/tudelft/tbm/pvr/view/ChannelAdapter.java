@@ -83,7 +83,13 @@ public class ChannelAdapter extends ArrayAdapter<Channel> {
         }
 
         if(screenWidth > 0) {
-            Program program = new Program("No data", "", "", "", mDate, mDate);
+            Program program;
+            try {
+                program = new Program("No data", "", "", "", mDate, mDate);
+            } catch (Exception e) {
+                program = new Program("No data", "", "", "", mDate.replace("Z",""), mDate.replace("Z", ""));
+            }
+
             ProgramView newProgram = new ProgramView(context, channel, program, screenWidth);
             programs.addView(newProgram);
         }
